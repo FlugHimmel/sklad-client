@@ -1,17 +1,53 @@
-# sklad_client
+# Склад — клиент (Flutter Web)
 
-A new Flutter project.
+Веб-клиент для системы складского учёта. Backend — Django + DRF
+(отдельный репозиторий: sklad-backend).
 
-## Getting Started
+## Что внутри
 
-This project is a starting point for a Flutter application.
+* **Тары** — список с фильтрами, карточка, наполнение, перемещение.
+* **Операции** — ввод постфактум: взял из тар → положил → брак.
+* **Накладные** — подготовка отгрузки, история.
+* **Отчёты** — производство, брак, готово к отгрузке, сводная по месяцам.
+* **Номенклатура** — справочник с алиасами (старый → главный).
+* **Заказы** — план/факт, импорт из Excel.
+* **Настройки** — реквизиты для PDF, опасная зона, аудит.
 
-A few resources to get you started if this is your first Flutter project:
+## Стек
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Flutter (stable) · Provider · http · Flutter Web.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Запуск (dev)
+
+    flutter pub get
+    flutter run -d chrome
+
+URL сервера — в lib/config.dart.
+
+## Сборка в прод
+
+    flutter build web --release
+    sudo rsync -a --delete build/web/ /var/www/sklad-client/
+    sudo chown -R www-data:www-data /var/www/sklad-client
+
+## Структура
+
+    lib/
+    ├── models/        — модели
+    ├── screens/       — экраны
+    │   ├── containers/     — тары
+    │   ├── production/     — операции
+    │   ├── shipment/       — накладные
+    │   ├── reports/        — отчёты
+    │   ├── products/       — номенклатура
+    │   ├── orders/         — заказы
+    │   ├── settings/       — настройки
+    │   ├── users/          — пользователи
+    │   └── admin/          — опасная зона
+    ├── services/      — API-клиенты
+    ├── widgets/       — виджеты
+    └── config.dart    — URL сервера
+
+## Лицензия
+
+MIT. См. LICENSE.
