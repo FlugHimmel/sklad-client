@@ -27,3 +27,7 @@ Thumbs.db
 
 # Логи
 *.log
+
+# Backups
+*.bak
+*.bak-*
