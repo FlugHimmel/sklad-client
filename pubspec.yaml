@@ -1,0 +1,25 @@
+name: sklad_client
+description: Складской учёт — Flutter Web клиент
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  url_launcher: ^6.3.0
+  web: ^1.0.0
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  shared_preferences: ^2.3.2
+  provider: ^6.1.2
+  mobile_scanner: ^7.0.0
+  printing: ^5.13.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

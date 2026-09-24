@@ -1,0 +1,121 @@
+class Product {
+  final int id;
+  final String article;
+  final String name;
+  final String productType;
+  final int? category;
+  final String uom;
+  final String weightG;
+  final String minStock;
+  final bool isActive;
+  final int? mo1;
+  final int? mo2;
+  final int? mo3;
+  final int? mo4;
+  final int? mo5;
+  final int? mo6;
+  final int? mo7;
+  final int? mo8;
+
+  Product({
+    required this.id,
+    required this.article,
+    required this.name,
+    required this.productType,
+    this.category,
+    required this.uom,
+    required this.weightG,
+    required this.minStock,
+    required this.isActive,
+    this.mo1,
+    this.mo2,
+    this.mo3,
+    this.mo4,
+    this.mo5,
+    this.mo6,
+    this.mo7,
+    this.mo8,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> j) {
+    return Product(
+      id: j['id'] as int,
+      article: (j['article'] ?? '').toString(),
+      name: (j['name'] ?? '').toString(),
+      productType: (j['product_type'] ?? 'raw').toString(),
+      category: j['category'] as int?,
+      uom: (j['uom'] ?? 'pcs').toString(),
+      weightG: (j['weight_g'] ?? '0').toString(),
+      minStock: (j['min_stock'] ?? '0').toString(),
+      isActive: j['is_active'] as bool? ?? true,
+      mo1: j['mo1'] as int?,
+      mo2: j['mo2'] as int?,
+      mo3: j['mo3'] as int?,
+      mo4: j['mo4'] as int?,
+      mo5: j['mo5'] as int?,
+      mo6: j['mo6'] as int?,
+      mo7: j['mo7'] as int?,
+      mo8: j['mo8'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'article': article,
+        'name': name,
+        'product_type': productType,
+        'category': category,
+        'uom': uom,
+        'weight_g': weightG,
+        'min_stock': minStock,
+        'is_active': isActive,
+        'mo1': mo1,
+        'mo2': mo2,
+        'mo3': mo3,
+        'mo4': mo4,
+        'mo5': mo5,
+        'mo6': mo6,
+        'mo7': mo7,
+        'mo8': mo8,
+      };
+
+  /// Список всех Mo-слотов по порядку.
+  List<int?> get moSlots => [mo1, mo2, mo3, mo4, mo5, mo6, mo7, mo8];
+
+  /// Непустые Mo-слоты.
+  List<int> get moIds => moSlots.whereType<int>().toList();
+
+  String get productTypeDisplay {
+    switch (productType) {
+      case 'raw':
+        return 'Сырьё';
+      case 'casting':
+        return 'Заготовка / литьё';
+      case 'part':
+        return 'Деталь';
+      case 'finished':
+        return 'Готовая продукция';
+      default:
+        return productType;
+    }
+  }
+
+  String get uomDisplay => uom == 'kg' ? 'кг' : 'шт';
+
+  /// Вес в кг для отображения (weight_g — в граммах на сервере)
+  String get weightKg {
+    final w = double.tryParse(weightG) ?? 0;
+    return (w / 1000).toStringAsFixed(3);
+  }
+}
+
+const kProductTypes = [
+  ('raw', 'Сырьё'),
+  ('casting', 'Заготовка / литьё'),
+  ('part', 'Деталь'),
+  ('finished', 'Готовая продукция'),
+];
+
+const kUomOptions = [
+  ('pcs', 'шт'),
+  ('kg', 'кг'),
+];
