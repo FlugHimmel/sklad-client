@@ -34,6 +34,7 @@ class StockContainer {
   final String statusDisplay;
   final int? warehouse;
   final String? warehouseName;
+  final String? warehouseCode;
   final int? order;
   final String? orderNumber;
   final String note;
@@ -49,7 +50,7 @@ class StockContainer {
     required this.id, required this.code, this.product, this.productArticle,
     this.productName, this.productType, required this.quantity,
     required this.status, required this.statusDisplay, this.warehouse,
-    this.warehouseName, this.order, this.orderNumber, required this.note,
+    this.warehouseName, this.warehouseCode, this.order, this.orderNumber, required this.note,
     this.lines = const [], this.createdAt, this.updatedAt,
     this.labelPrintedAt, this.packedAt, this.shippedAt, this.events = const [],
   });
@@ -66,6 +67,7 @@ class StockContainer {
         statusDisplay: (j['status_display'] ?? '').toString(),
         warehouse: j['warehouse'] as int?,
         warehouseName: j['warehouse_name'] as String?,
+        warehouseCode: j['warehouse_code'] as String?,
         order: j['order'] as int?,
         orderNumber: j['order_number'] as String?,
         note: (j['note'] ?? '').toString(),

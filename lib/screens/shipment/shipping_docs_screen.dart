@@ -80,7 +80,7 @@ class _ShippingDocsScreenState extends State<ShippingDocsScreen> {
         _todayContainers = page.items
             .where((c) =>
                 c.shippedAt == null &&
-                (c.warehouseName ?? '').toLowerCase().contains('злк'))
+                c.warehouseCode == 'ZLK')
             .toList();
       });
     } catch (e) {
